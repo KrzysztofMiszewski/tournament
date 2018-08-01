@@ -30,7 +30,7 @@ public class GameServiceImpl implements GameService {
     public void selectWinner(Game game, Participant winner) {
         if (isFinal(game) == true ) {
            Tournament tournament = game.getTournament();
-           tournament.setWinner(winner.getNick);
+           tournament.setWinner(winner.getNick());
            tournamentRepository.save(tournament);
         }
         else {
