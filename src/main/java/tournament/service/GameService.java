@@ -8,5 +8,5 @@ import tournament.model.Participant;
 public interface GameService {
 
     Game showCurrentGame(Game game);
-    void selectWinner(Game game, Participant white, Participant black);
+    void selectWinner(Game game, Participant winner);
     }
