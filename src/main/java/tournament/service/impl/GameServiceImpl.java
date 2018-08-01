@@ -22,16 +22,13 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public Game showCurrentGame(Game game) {
-        game.getGameNumber();
-        game.getRound();
-        gameRepository.save(game);
-        return game;
+    public Game showCurrentGame(int round, int gameNumber) {
+        return gameRepository.findOneByRoundAndGameNumber(round, gameNumber);
     }
 
     @Override
     public void selectWinner(Game game, Participant winner) {
-        if (isFinal(game) == true) {
+        if (isFinal(game)) {
             Tournament tournament = game.getTournament();
             tournament.setWinner(winner.getNick());
             tournamentRepository.save(tournament);
@@ -45,7 +42,7 @@ public class GameServiceImpl implements GameService {
     public void create(Tournament tournament, int round, int gameNumber) {
         Game game = new Game();
         game.setTournament(tournament);
-        game.getGameNumber();
+        game.setGameNumber(gameNumber);
         game.setRound(round);
         gameRepository.save(game);
     }
