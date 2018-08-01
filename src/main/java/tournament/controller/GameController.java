@@ -7,7 +7,7 @@ import tournament.service.GameService;
 @RestController
 @RequestMapping ("/api/game")
 public class GameController {
+
+   private GameService gameService;
+
 }
-
-
-

@@ -6,16 +6,19 @@ import tournament.model.Game;
 import tournament.model.Participant;
 import tournament.model.Tournament;
 import tournament.repository.GameRepository;
+import tournament.repository.TournamentRepository;
 import tournament.service.GameService;
 
 @Service
 public class GameServiceImpl implements GameService {
 
     private GameRepository gameRepository;
+    private TournamentRepository tournamentRepository;
 
-    @Autowired
-    public GameServiceImpl(GameRepository gameRepository) {
+        @Autowired
+    public GameServiceImpl(GameRepository gameRepository, TournamentRepository tournamentRepository) {
         this.gameRepository = gameRepository;
+        this.tournamentRepository = tournamentRepository;
     }
 
     @Override
@@ -27,11 +30,14 @@ public class GameServiceImpl implements GameService {
     public void selectWinner(Game game, Participant winner) {
         if (isFinal(game) == true ) {
            Tournament tournament = game.getTournament();
-
+           tournament.setWinner(winner.getNick);
+           tournamentRepository.save(tournament);
         }
-
-        gameRepository.save();
-    }
+        else {
+            game.setWinner(winner);
+            gameRepository.save(game);
+        }
+        }
 
     public boolean isFinal (Game game){
         if (game.getRound() == 0){

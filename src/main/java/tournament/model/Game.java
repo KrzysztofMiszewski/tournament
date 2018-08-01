@@ -13,7 +13,7 @@ public class Game {
 
     private Participant white;
     private Participant black;
-    private String winner;
+    private Participant winner;
     private int round;
     private int gameNumber;
 
@@ -49,11 +49,11 @@ public class Game {
         this.black = black;
     }
 
-    public String getWinner() {
+    public Participant getWinner() {
         return winner;
     }
 
-    public void setWinner(String winner) {
+    public void setWinner(Participant winner) {
         this.winner = winner;
     }
 
