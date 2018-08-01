@@ -1,6 +1,11 @@
 package tournament.service;
 
-public interface ParticipantService {
-    // tworzy participent dołacza do tournament
+import tournament.model.Participant;
+import tournament.model.Tournament;
 
+public interface ParticipantService {
+ void Join(Tournament tournament, String nick, String mail);
+  Participant participant = new Participant();
+
+  
 }

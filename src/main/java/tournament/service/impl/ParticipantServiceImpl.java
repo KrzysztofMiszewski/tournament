@@ -1,4 +1,12 @@
 package tournament.service.impl;
 
-public class ParticipantServiceImpl {
+import tournament.model.Tournament;
+import tournament.service.ParticipantService;
+
+public class ParticipantServiceImpl implements ParticipantService {
+
+    @Override
+    public void Join(Tournament tournament, String nick, String mail) {
+
+    }
 }
