@@ -15,7 +15,7 @@ public class GameServiceImpl implements GameService {
     private GameRepository gameRepository;
     private TournamentRepository tournamentRepository;
 
-        @Autowired
+    @Autowired
     public GameServiceImpl(GameRepository gameRepository, TournamentRepository tournamentRepository) {
         this.gameRepository = gameRepository;
         this.tournamentRepository = tournamentRepository;
@@ -23,27 +23,37 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public Game showCurrentGame(Game game) {
-        return null;
+        game.getGameNumber();
+        game.getRound();
+        gameRepository.save(game);
+        return game;
     }
 
     @Override
     public void selectWinner(Game game, Participant winner) {
-        if (isFinal(game) == true ) {
-           Tournament tournament = game.getTournament();
-           tournament.setWinner(winner.getNick);
-           tournamentRepository.save(tournament);
-        }
-        else {
+        if (isFinal(game) == true) {
+            Tournament tournament = game.getTournament();
+            tournament.setWinner(winner.getNick());
+            tournamentRepository.save(tournament);
+        } else {
             game.setWinner(winner);
             gameRepository.save(game);
         }
-        }
+    }
 
-    public boolean isFinal (Game game){
-        if (game.getRound() == 0){
+    @Override
+    public void create(Tournament tournament, int round, int gameNumber) {
+        Game game = new Game();
+        game.setTournament(tournament);
+        game.getGameNumber();
+        game.setRound(round);
+        gameRepository.save(game);
+    }
+
+    public boolean isFinal(Game game) {
+        if (game.getRound() == 0) {
             return true;
-        }
-        else
+        } else
             return false;
     }
 

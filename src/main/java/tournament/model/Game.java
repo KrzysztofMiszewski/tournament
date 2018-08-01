@@ -58,7 +58,7 @@ public class Game {
     }
 
     public int getRound() {
-        return round;
+        return this.round;
     }
 
     public void setRound(int round) {
@@ -66,7 +66,7 @@ public class Game {
     }
 
     public int getGameNumber() {
-        return gameNumber;
+        return this.gameNumber;
     }
 
     public void setGameNumber(int gameNumber) {
