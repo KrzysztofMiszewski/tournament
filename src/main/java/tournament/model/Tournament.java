@@ -22,6 +22,7 @@ public class Tournament {
             joinColumns = { @JoinColumn(name = "tournament_id") },
             inverseJoinColumns = { @JoinColumn(name = "participant_id") })
     private Set<Participant> participants;
+    private Boolean isStarted = false;
 
     public Long getId() {
         return id;
