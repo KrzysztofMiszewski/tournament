@@ -3,14 +3,14 @@ package tournament.model;
 
 import org.springframework.data.annotation.Id;
 
-import javax.persistence.Entity;
-import javax.persistence.ManyToMany;
+import javax.persistence.*;
 import java.util.Set;
 @Entity
 public class Participant {
-
+    @Id
+   @GeneratedValue
     private Long Id;
-    
+    @Column(unique = true)
     private String mail;
     private String nick;
 
