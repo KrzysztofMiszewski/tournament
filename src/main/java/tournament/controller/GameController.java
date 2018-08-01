@@ -8,8 +8,6 @@ import tournament.service.GameService;
 @RequestMapping ("/api/game")
 public class GameController {
 
-    GameService gameService;
-
-
+   private GameService gameService;
 
 }

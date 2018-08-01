@@ -1,37 +1,49 @@
 package tournament.model;
 
+
+import org.springframework.data.annotation.Id;
+
 import javax.persistence.*;
-
+import java.util.Set;
 @Entity
-@Table(name = "users")
 public class Participant {
+    @Id
+   @GeneratedValue
+    private Long Id;
+    @Column(unique = true)
+    private String mail;
+    private String nick;
 
-        @Id
-        @GeneratedValue
-        private Long id;
 
-        @Column(unique = true)
-        private String mail;
-
-        private String password;
-
-        public Long getId() {
-            return id;
-        }
-
-        public String getMail() {
-            return mail;
-        }
-
-        public void setMail(String mail) {
-            this.mail = mail;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public void setPassword(String password) {
-            this.password = password;
-        }
+    @ManyToMany(mappedBy ="participants")
+    private Set< Tournament > tournaments;
+    public Long getId() {
+        return Id;
     }
+
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
+    public String getNick() {
+        return nick;
+    }
+
+    public void setNick(String nick) {
+        this.nick = nick;
+    }
+
+    public Set<Tournament> getTournaments() {
+        return tournaments;
+    }
+
+    public void setTournaments(Set<Tournament> tournaments) {
+        this.tournaments = tournaments;
+    }
+
+
+}
