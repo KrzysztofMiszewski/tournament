@@ -32,7 +32,6 @@ public class Game {
 
     public Long getId() {
         return id;
-
     }
 
     public Participant getWhite() {

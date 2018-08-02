@@ -8,7 +8,7 @@ import tournament.model.Tournament;
 @Service
 public interface GameService {
 
-    Game showCurrentGame(int round, int gameNumber);
+    Game showCurrentGame(int round, int gameNumber, long tournament_id);
     void selectWinner(Game game, Participant winner);
-    void create(Tournament tournament, int round, int gameNumber);
+    void create (Tournament tournament, int round, int gameNumber);
     }

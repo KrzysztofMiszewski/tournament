@@ -22,8 +22,8 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public Game showCurrentGame(int round, int gameNumber) {
-        return gameRepository.findOneByRoundAndGameNumber(round, gameNumber);
+    public Game showCurrentGame(int round, int gameNumber, long tournament_id) {
+        return gameRepository.findOneByRoundAndGameNumberAndTournament_Id(round, gameNumber, tournament_id);
     }
 
     @Override

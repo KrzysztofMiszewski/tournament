@@ -9,18 +9,21 @@ public class Tournament {
     @Id
     @GeneratedValue
     private Long id;
+
     @OneToMany(mappedBy = "tournament")
     private Set<Game> games;
+
     @ManyToOne
     private User owner;
     private String winner;
     private Integer MaxPop;
     private String name;
-    @ManyToMany(cascade = { CascadeType.ALL })
+
+    @ManyToMany(cascade = {CascadeType.ALL})
     @JoinTable(
             name = "tournament_participant",
-            joinColumns = { @JoinColumn(name = "tournament_id") },
-            inverseJoinColumns = { @JoinColumn(name = "participant_id") })
+            joinColumns = {@JoinColumn(name = "tournament_id")},
+            inverseJoinColumns = {@JoinColumn(name = "participant_id")})
     private Set<Participant> participants;
     private Boolean isStarted = false;
 
