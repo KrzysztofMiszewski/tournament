@@ -9,6 +9,8 @@ import tournament.repository.GameRepository;
 import tournament.repository.TournamentRepository;
 import tournament.service.GameService;
 
+import java.util.Set;
+
 @Service
 public class GameServiceImpl implements GameService {
 
@@ -28,13 +30,17 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public void selectWinner(Game game, Participant winner) {
+        Tournament tournament = new Tournament();
         if (isFinal(game)) {
-            Tournament tournament = game.getTournament();
+            tournament = game.getTournament();
             tournament.setWinner(winner.getNick());
             tournamentRepository.save(tournament);
         } else {
             game.setWinner(winner.getNick());
             gameRepository.save(game);
+
+            Game nextGame = gameRepository.findOneByRoundAndGameNumberAndTournament_Id(game.getRound()-1,game.getGameNumber()/2, tournament.getId());
+            gameRepository.save(nextGame);
         }
     }
 
@@ -47,11 +53,17 @@ public class GameServiceImpl implements GameService {
         gameRepository.save(game);
     }
 
-    public boolean isFinal(Game game) {
-        if (game.getRound() == 0) {
-            return true;
-        } else
-            return false;
+    @Override
+    public  Set<Game> findOneByRoundAndTournament_IdAndBlackIsNull(int round, long tournament_id) {
+        return gameRepository.findOneByRoundAndTournament_IdAndBlackIsNull(round, tournament_id);
     }
 
+    @Override
+    public Game findOneByRoundAndGameNumberAndTournament_Id(int round, int gameNumber, long tournament_id) {
+        return gameRepository.findOneByRoundAndGameNumberAndTournament_Id(round,gameNumber,tournament_id);
+    }
+
+    private boolean isFinal(Game game) {
+        return (game.getRound() == 0);
+    }
 }
