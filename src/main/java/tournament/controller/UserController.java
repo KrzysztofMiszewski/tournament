@@ -27,7 +27,7 @@ public class UserController {
                 return userService.findByLogin(login);
         }
         @GetMapping("/3")
-        public Set<User> findOneById(@PathVariable Long id){
+        public User findOneById(@PathVariable Long id){
             return userService.findOneById(id);
         }
         @PostMapping
