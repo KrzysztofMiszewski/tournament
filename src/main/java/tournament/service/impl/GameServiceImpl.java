@@ -31,11 +31,20 @@ public class GameServiceImpl implements GameService {
 
     @Override
     public void selectWinner(Game game, Participant winner) {
+<<<<<<< Updated upstream
         if (isFinal(game) == true) {
             Tournament tournament = game.getTournament();
             tournament.setWinner(winner.getNick());
             tournamentRepository.save(tournament);
         } else {
+=======
+        if (isFinal(game) == true ) {
+           Tournament tournament = game.getTournament();
+           tournament.setWinner(winner.getNick());
+           tournamentRepository.save(tournament);
+        }
+        else {
+>>>>>>> Stashed changes
             game.setWinner(winner);
             gameRepository.save(game);
         }
