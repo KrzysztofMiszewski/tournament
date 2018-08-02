@@ -26,6 +26,10 @@ public class UserController {
         public Set<User> findByLogin(@PathVariable String login){
                 return userService.findByLogin(login);
         }
+        @GetMapping("/3")
+        public Set<User> findOneById(@PathVariable Long id){
+            return userService.findOneById(id);
+        }
         @PostMapping
         public void createNewUser(@PathVariable String login,
                                   @PathVariable String password){
