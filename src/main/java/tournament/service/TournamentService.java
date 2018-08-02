@@ -9,6 +9,7 @@ public interface TournamentService {
 
     Set<Tournament> findAllBy();
     Set<Tournament> findAllByIsStartedIsFalse();
+    Tournament findOneById(Long id);
     Boolean isStarted(Tournament tournament);
     Tournament create(User user, Integer maxPop, String Name);
     void start(Tournament tournament);

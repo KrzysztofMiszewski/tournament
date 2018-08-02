@@ -41,6 +41,11 @@ public class TournamentServiceImpl implements TournamentService {
     }
 
     @Override
+    public Tournament findOneById(Long id) {
+        return tournamentRepository.findOneById(id);
+    }
+
+    @Override
     public Boolean isStarted(Tournament tournament) {
         return tournament.getStarted();
     }
