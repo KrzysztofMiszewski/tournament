@@ -2,7 +2,6 @@ package tournament.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 import tournament.model.Game;
 import tournament.model.Participant;
 import tournament.model.Tournament;
@@ -40,7 +39,8 @@ public class GameServiceImpl implements GameService {
             game.setWinner(winner.getNick());
             gameRepository.save(game);
 
-           Game nextGame = gameRepository.findOneByRoundAndGameNumberAndTournament_Id(game.getRound()-1,game.getGameNumber()/2, tournament.getId());
+            Game nextGame = gameRepository.findOneByRoundAndGameNumberAndTournament_Id(game.getRound()-1,game.getGameNumber()/2, tournament.getId());
+            gameRepository.save(nextGame);
         }
     }
 
@@ -66,5 +66,4 @@ public class GameServiceImpl implements GameService {
     private boolean isFinal(Game game) {
         return (game.getRound() == 0);
     }
-
 }
