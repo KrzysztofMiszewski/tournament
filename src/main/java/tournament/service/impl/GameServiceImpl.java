@@ -45,9 +45,10 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    public void create(Tournament tournament, int round, int gameNumber) {
+    public void create(Long tournamentId, int round, int gameNumber) {
         Game game = new Game();
-        game.setTournament(tournament);
+
+        game.setTournament(tournamentRepository.findOneById(tournamentId));
         game.setGameNumber(gameNumber);
         game.setRound(round);
         gameRepository.save(game);
