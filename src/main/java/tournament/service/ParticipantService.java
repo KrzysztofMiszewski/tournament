@@ -7,5 +7,4 @@ public interface ParticipantService {
  void Join(Tournament tournament, String nick, String mail);
   Participant participant = new Participant();
 
-  
 }
