@@ -22,7 +22,7 @@ public class UserController {
         public Set<User> findAll() {
             return userService.findAll();
         }
-        @GetMapping
+        @GetMapping("/2")
         public Set<User> findByLogin(@PathVariable String login){
                 return userService.findByLogin(login);
         }

@@ -1,13 +1,11 @@
 package tournament.model;
 
-
-import org.springframework.data.annotation.Id;
-
 import javax.persistence.*;
 import java.util.Set;
 
 @Entity
 public class Participant {
+
     @Id
     @GeneratedValue
     private Long Id;
@@ -19,6 +17,8 @@ public class Participant {
 
     @ManyToMany(mappedBy = "participants")
     private Set<Tournament> tournaments;
+
+
 
     public Long getId() {
         return Id;

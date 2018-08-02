@@ -33,7 +33,7 @@ public class GameServiceImpl implements GameService {
             tournament.setWinner(winner.getNick());
             tournamentRepository.save(tournament);
         } else {
-            game.setWinner(winner);
+            game.setWinner(winner.getNick());
             gameRepository.save(game);
         }
     }

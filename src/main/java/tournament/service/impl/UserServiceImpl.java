@@ -38,6 +38,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User logIn(User user) {
-        return userRepository.logIn(user);
+        //return userRepository.logIn(user); wywołuje błąd.
+        return null;
     }
 }

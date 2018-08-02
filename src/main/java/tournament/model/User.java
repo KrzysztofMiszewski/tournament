@@ -1,6 +1,7 @@
 package tournament.model;
 
 import javax.persistence.*;
+import java.util.Set;
 
 @Entity
 @Table(name = "users")
@@ -13,7 +14,7 @@ public class User {
     private String login;
     private String password;
     @OneToMany(mappedBy = "owner")
-    private Tournament tournament;
+    private Set<Tournament> tournament;
 
     public Long getId() {
         return Id;
@@ -35,11 +36,11 @@ public class User {
         this.password = password;
     }
 
-    public Tournament getTournament() {
+    public Set<Tournament> getTournament() {
         return tournament;
     }
 
-    public void setTournament(Tournament tournament) {
+    public void setTournament(Set<Tournament> tournament) {
         this.tournament = tournament;
     }
 }
