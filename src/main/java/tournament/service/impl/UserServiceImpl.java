@@ -7,6 +7,7 @@ import tournament.repository.UserRepository;
 import tournament.service.UserService;
 
 
+import javax.persistence.OneToMany;
 import java.util.Set;
 
 @Service
@@ -29,7 +30,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void createNewUser(String login, String password) {
+    public User findOneById(Long id) {
+        return userRepository.findOneById(id);
+    }
+    @Override
+    public void create(String login, String password) {
         User user = new User();
         user.setLogin(login);
         user.setPassword(password);
@@ -38,7 +43,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User logIn(User user) {
-        //return userRepository.logIn(user); wywołuje błąd.
-        return null;
+        return user;
     }
 }

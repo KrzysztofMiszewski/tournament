@@ -11,7 +11,7 @@ public interface UserRepository extends CrudRepository<User, Long> {
 
     Set<User> findAll();
     Set<User> findByLogin(String Login);
-    //void createNewUser(User user); wywołuje błąd
-    //User logIn(User user); wywołuje błąd
+    User findOneById(Long id);
+
 
 }

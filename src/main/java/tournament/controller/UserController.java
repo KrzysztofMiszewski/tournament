@@ -29,7 +29,7 @@ public class UserController {
         @PostMapping
         public void createNewUser(@PathVariable String login,
                                   @PathVariable String password){
-            userService.createNewUser(login, password);
+            userService.create(login, password);
 
         }
 
