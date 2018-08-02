@@ -13,6 +13,7 @@ public class Game {
 
     @ManyToOne
     private Participant white;
+
     @ManyToOne
     private Participant black;
     private String winner;

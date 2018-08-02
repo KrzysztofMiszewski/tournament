@@ -3,7 +3,6 @@ package tournament.dto;
 import tournament.model.Game;
 import tournament.model.Tournament;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
