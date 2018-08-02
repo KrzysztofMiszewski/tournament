@@ -9,7 +9,7 @@ public class User {
 
     @Id
     @GeneratedValue
-    private Long Id;
+    private Long id;
     @Column(unique = true)
     private String login;
     private String password;
@@ -17,7 +17,7 @@ public class User {
     private Set<Tournament> tournament;
 
     public Long getId() {
-        return Id;
+        return id;
     }
 
     public String getLogin() {
