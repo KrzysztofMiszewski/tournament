@@ -1,6 +1,7 @@
 package tournament.service.impl;
 
 
+import org.springframework.stereotype.Service;
 import tournament.model.User;
 import tournament.repository.UserRepository;
 import tournament.service.UserService;
@@ -8,6 +9,7 @@ import tournament.service.UserService;
 
 import java.util.Set;
 
+@Service
 public class UserServiceImpl implements UserService {
 
     private UserRepository userRepository;
@@ -36,6 +38,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User logIn(User user) {
-        return userRepository.logIn(user);
+        //return userRepository.logIn(user); wywołuje błąd.
+        return null;
     }
 }

@@ -9,7 +9,8 @@ import tournament.model.Tournament;
 @Repository
 public interface GameRepository extends CrudRepository <Game, Long> {
 
-    Game showCurrentGame(Game game);
-    void selectWinner(Game game, Participant winner);
-    void create(Tournament tournament, int round, int gameNumber);
-}
+    //Game showCurrentGame(Game game); wywołuje błąd
+   // void selectWinner(Game game, Participant winner); wywołuje błąd
+   // void create(Tournament tournament, int round, int gameNumber); wywołuje błąd
+    Game findOneByRoundAndGameNumber(int round, int gameNumber);
+    }

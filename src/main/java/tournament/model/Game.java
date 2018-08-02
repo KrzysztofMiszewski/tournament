@@ -11,9 +11,11 @@ public class Game {
     @GeneratedValue
     private Long id;
 
+    @ManyToOne
     private Participant white;
+    @ManyToOne
     private Participant black;
-    private Participant winner;
+    private String winner;
     private int round;
     private int gameNumber;
 
@@ -49,11 +51,11 @@ public class Game {
         this.black = black;
     }
 
-    public Participant getWinner() {
+    public String getWinner() {
         return winner;
     }
 
-    public void setWinner(Participant winner) {
+    public void setWinner(String winner) {
         this.winner = winner;
     }
 
