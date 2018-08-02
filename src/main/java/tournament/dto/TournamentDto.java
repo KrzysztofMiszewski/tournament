@@ -3,7 +3,6 @@ package tournament.dto;
 import tournament.model.Game;
 import tournament.model.Tournament;
 
-import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -12,7 +11,7 @@ public class TournamentDto {
     private GameDto[][] games;
     private UserDto owner;
     private String winner;
-    private Integer MaxPop;
+    private Integer maxPop;
     private String name;
     private Set<ParticipantDto> participants;
     private Boolean isStarted = false;
@@ -20,7 +19,7 @@ public class TournamentDto {
     public TournamentDto(Tournament tournament) {
         this.owner = new UserDto(tournament.getOwner());
         this.winner = tournament.getWinner();
-        this.MaxPop = tournament.getMaxPop();
+        this.maxPop = tournament.getMaxPop();
         this.name = tournament.getName();
         this.participants = tournament.getParticipants().stream().map(ParticipantDto::new).collect(Collectors.toSet());
         this.isStarted = tournament.getStarted();
@@ -50,7 +49,7 @@ public class TournamentDto {
     }
 
     public Integer getMaxPop() {
-        return MaxPop;
+        return maxPop;
     }
 
     public String getName() {
