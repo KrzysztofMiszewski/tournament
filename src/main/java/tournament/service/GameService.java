@@ -14,5 +14,5 @@ public interface GameService {
     void selectWinner(Game game, Participant winner);
     void create (Tournament tournament, int round, int gameNumber);
     Set<Game> findOneByRoundAndTournament_IdAndBlackIsNull(int round, long tournament_id);
-
+    Game findOneByRoundAndGameNumberAndTournament_Id(int round, int gameNumber, long tournament_id);
 }
