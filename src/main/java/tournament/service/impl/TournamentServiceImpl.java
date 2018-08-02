@@ -1,6 +1,7 @@
 package tournament.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import tournament.model.Game;
 import tournament.model.Participant;
@@ -15,6 +16,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
+@Service
 public class TournamentServiceImpl implements TournamentService {
 
     private TournamentRepository tournamentRepository;
@@ -59,11 +61,13 @@ public class TournamentServiceImpl implements TournamentService {
         int rounds = createGames(tournament);
         randomiseParticipants(tournament, rounds);
         autoResolveWildcards(tournament, rounds);
-
     }
 
     private void autoResolveWildcards(Tournament tournament, int rounds) {
-        //TODO
+        Set<Game> games = gameService.findOneByRoundAndTournament_IdAndBlackIsNull(rounds - 1, tournament.getId());
+        for (Game game : games) {
+            gameService.selectWinner(game, game.getWhite());
+        }
     }
 
     private void randomiseParticipants(Tournament tournament, int rounds) {
@@ -72,13 +76,13 @@ public class TournamentServiceImpl implements TournamentService {
         Game game;
         for (int i = 0; i < games; i += 2) {
             int index = (int) (Math.random() * participants.size());
-            game = gameRepository.findOneByRoundAndGameNumber(rounds - 1, i);
+            game = gameService.findOneByRoundAndGameNumberAndTournament_Id(rounds - 1, i, tournament.getId());
             game.setWhite(participants.remove(index));
             gameRepository.save(game);
         }
         for (int i = 1; i < games && !participants.isEmpty(); i += 2) {
             int index = (int) (Math.random() * participants.size());
-            game = gameRepository.findOneByRoundAndGameNumber(rounds - 1, i);
+            game = gameRepository.findOneByRoundAndGameNumberAndTournament_Id(rounds - 1, i, tournament.getId());
             game.setBlack(participants.remove(index));
             gameRepository.save(game);
         }
