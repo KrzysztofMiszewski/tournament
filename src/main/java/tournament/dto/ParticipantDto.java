@@ -1,9 +1,6 @@
 package tournament.dto;
 
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import tournament.model.Participant;
-
-import static tournament.service.ParticipantService.participant;
 
 public class ParticipantDto {
 private String mail;
@@ -21,6 +18,4 @@ private String nick;
     public String getNick() {
         return nick;
     }
-
-
 }
