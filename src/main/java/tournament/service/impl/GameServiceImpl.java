@@ -2,6 +2,7 @@ package tournament.service.impl;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import tournament.model.Game;
 import tournament.model.Participant;
 import tournament.model.Tournament;
@@ -29,8 +30,12 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
+    @Transactional
     public void selectWinner(Game game, Participant winner) {
-        Tournament tournament = new Tournament();
+        if (winner == null) System.out.println("WinnerNull");
+        if (winner.getNick() == null) System.out.println("NickNull");
+        if (game == null) System.out.println("GameNull");
+        Tournament tournament = game.getTournament();
         if (isFinal(game)) {
             tournament = game.getTournament();
             tournament.setWinner(winner.getNick());
@@ -38,8 +43,13 @@ public class GameServiceImpl implements GameService {
         } else {
             game.setWinner(winner.getNick());
             gameRepository.save(game);
-
-            Game nextGame = gameRepository.findOneByRoundAndGameNumberAndTournament_Id(game.getRound()-1,game.getGameNumber()/2, tournament.getId());
+            Game nextGame = gameRepository.findOneByRoundAndGameNumberAndTournament_Id(game.getRound()-1,
+                    game.getGameNumber()/2, tournament.getId());
+            if (game.getGameNumber() % 2 == 0) {
+                nextGame.setWhite(winner);
+            } else {
+                nextGame.setBlack(winner);
+            }
             gameRepository.save(nextGame);
         }
     }

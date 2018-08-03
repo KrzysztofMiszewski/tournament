@@ -3,6 +3,7 @@ package tournament.dto;
 import tournament.model.Game;
 import tournament.model.Tournament;
 
+import java.util.Arrays;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -30,9 +31,12 @@ public class TournamentDto {
             for (Game game : tournament.getGames()) {
                 if (game.getRound() > rounds) rounds = game.getRound();
             }
+            rounds++;
             games = new GameDto[rounds][];
+            System.out.println("RUNDY: " + games.length);
             for (int i = 0; i < games.length; i++) {
-                games[i] = new GameDto[(int) Math.pow(2, i + 1)];
+                games[i] = new GameDto[(int) Math.pow(2, i)];
+                System.out.println(i + " - GRY: " + games[i].length);
             }
             for (Game game : tournament.getGames()) {
                 games[game.getRound()][game.getGameNumber()] = new GameDto(game);
