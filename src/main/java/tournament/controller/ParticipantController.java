@@ -2,7 +2,6 @@ package tournament.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import tournament.model.Tournament;
 import tournament.service.ParticipantService;
 
 @RestController
@@ -15,6 +14,9 @@ public class ParticipantController {
     public ParticipantController(ParticipantService participantService) {
         this.participantService = participantService;
     }
-      //@GetMapping
-   // public void Join(){return participantService.Join();}
+
+    @PostMapping("/join/{tournamentId}/{nick}/{mail}")
+    public void Join(@PathVariable Long tournamentId, @PathVariable String nick , @PathVariable String mail) {
+        participantService.Join(tournamentId, nick, mail);
+    }
 }

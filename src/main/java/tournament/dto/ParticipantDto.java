@@ -1,5 +1,6 @@
 package tournament.dto;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import tournament.model.Participant;
 
 public class ParticipantDto {

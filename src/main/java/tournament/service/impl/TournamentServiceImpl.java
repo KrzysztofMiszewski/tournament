@@ -6,9 +6,9 @@ import org.springframework.transaction.annotation.Transactional;
 import tournament.model.Game;
 import tournament.model.Participant;
 import tournament.model.Tournament;
-import tournament.model.User;
 import tournament.repository.GameRepository;
 import tournament.repository.TournamentRepository;
+import tournament.repository.UserRepository;
 import tournament.service.GameService;
 import tournament.service.TournamentService;
 
@@ -20,12 +20,14 @@ import java.util.Set;
 public class TournamentServiceImpl implements TournamentService {
 
     private TournamentRepository tournamentRepository;
+    private UserRepository userRepository;
     private GameRepository gameRepository;
     private GameService gameService;
 
     @Autowired
-    public TournamentServiceImpl(TournamentRepository tournamentRepository, GameRepository gameRepository, GameService gameService) {
+    public TournamentServiceImpl(TournamentRepository tournamentRepository, UserRepository userRepository, GameRepository gameRepository, GameService gameService) {
         this.tournamentRepository = tournamentRepository;
+        this.userRepository = userRepository;
         this.gameRepository = gameRepository;
         this.gameService = gameService;
     }
@@ -51,18 +53,19 @@ public class TournamentServiceImpl implements TournamentService {
     }
 
     @Override
-    public Tournament create(User user, Integer maxPop, String name) {
+    public Tournament create(Long userId, Integer maxPop, String name) {
         Tournament tournament = new Tournament();
         tournament.setMaxPop(maxPop);
         tournament.setName(name);
-        tournament.setOwner(user);
+        tournament.setOwner(userRepository.findOne(userId));
         tournamentRepository.save(tournament);
         return tournament;
     }
 
     @Override
     @Transactional
-    public void start(Tournament tournament) {
+    public void start(Long id) {
+        Tournament tournament = tournamentRepository.findOneById(id);
         int rounds = createGames(tournament);
         randomiseParticipants(tournament, rounds);
         autoResolveWildcards(tournament, rounds);
@@ -103,7 +106,7 @@ public class TournamentServiceImpl implements TournamentService {
         }
         for (int row = 0; row < rounds; row++) {
             for (int game = 0; game < (row+1)*2; game++) {
-                gameService.create(tournament, row, game);
+                gameService.create(tournament.getId(), row, game);
             }
         }
         tournamentRepository.save(tournament);

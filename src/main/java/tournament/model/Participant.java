@@ -1,6 +1,7 @@
 package tournament.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -16,7 +17,7 @@ public class Participant {
     private String nick;
 
     @ManyToMany(mappedBy = "participants")
-    private Set<Tournament> tournaments;
+    private Set<Tournament> tournaments = new HashSet<>();
 
 
 
