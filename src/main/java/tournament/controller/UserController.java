@@ -30,7 +30,7 @@ public class UserController {
         public User findOneById(@PathVariable Long id){
             return userService.findOneById(id);
         }
-        @PostMapping
+        @PostMapping("/new/{login}/{password}")
         public void createNewUser(@PathVariable String login,
                                   @PathVariable String password){
             userService.create(login, password);

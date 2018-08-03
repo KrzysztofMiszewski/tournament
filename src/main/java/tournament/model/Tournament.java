@@ -1,6 +1,7 @@
 package tournament.model;
 
 import javax.persistence.*;
+import java.util.HashSet;
 import java.util.Set;
 
 @Entity
@@ -24,7 +25,7 @@ public class Tournament {
             name = "tournament_participant",
             joinColumns = {@JoinColumn(name = "tournament_id")},
             inverseJoinColumns = {@JoinColumn(name = "participant_id")})
-    private Set<Participant> participants;
+    private Set<Participant> participants = new HashSet<>();
     private Boolean isStarted = false;
 
     public Boolean getStarted() {

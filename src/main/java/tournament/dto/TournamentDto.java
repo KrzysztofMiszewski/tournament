@@ -14,25 +14,29 @@ public class TournamentDto {
     private Integer maxPop;
     private String name;
     private Set<ParticipantDto> participants;
-    private Boolean isStarted = false;
+    private Boolean isStarted;
 
     public TournamentDto(Tournament tournament) {
         this.owner = new UserDto(tournament.getOwner());
         this.winner = tournament.getWinner();
         this.maxPop = tournament.getMaxPop();
         this.name = tournament.getName();
-        this.participants = tournament.getParticipants().stream().map(ParticipantDto::new).collect(Collectors.toSet());
+        if (tournament.getParticipants() != null) {
+            this.participants = tournament.getParticipants().stream().map(ParticipantDto::new).collect(Collectors.toSet());
+        }
         this.isStarted = tournament.getStarted();
-        int rounds = 0;
-        for (Game game : tournament.getGames()) {
-            if (game.getRound() > rounds) rounds = game.getRound();
-        }
-        games = new GameDto[rounds][];
-        for (int i = 0; i < games.length; i++) {
-            games[i] = new GameDto[(int) Math.pow(2, i+1)];
-        }
-        for (Game game : tournament.getGames()) {
-            games[game.getRound()][game.getGameNumber()] = new GameDto(game);
+        if (tournament.getGames() != null) {
+            int rounds = 0;
+            for (Game game : tournament.getGames()) {
+                if (game.getRound() > rounds) rounds = game.getRound();
+            }
+            games = new GameDto[rounds][];
+            for (int i = 0; i < games.length; i++) {
+                games[i] = new GameDto[(int) Math.pow(2, i + 1)];
+            }
+            for (Game game : tournament.getGames()) {
+                games[game.getRound()][game.getGameNumber()] = new GameDto(game);
+            }
         }
     }
 

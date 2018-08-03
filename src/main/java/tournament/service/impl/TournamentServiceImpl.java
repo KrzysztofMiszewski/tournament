@@ -6,7 +6,6 @@ import org.springframework.transaction.annotation.Transactional;
 import tournament.model.Game;
 import tournament.model.Participant;
 import tournament.model.Tournament;
-import tournament.model.User;
 import tournament.repository.GameRepository;
 import tournament.repository.TournamentRepository;
 import tournament.repository.UserRepository;
@@ -26,8 +25,9 @@ public class TournamentServiceImpl implements TournamentService {
     private GameService gameService;
 
     @Autowired
-    public TournamentServiceImpl(TournamentRepository tournamentRepository, GameRepository gameRepository, GameService gameService) {
+    public TournamentServiceImpl(TournamentRepository tournamentRepository, UserRepository userRepository, GameRepository gameRepository, GameService gameService) {
         this.tournamentRepository = tournamentRepository;
+        this.userRepository = userRepository;
         this.gameRepository = gameRepository;
         this.gameService = gameService;
     }
