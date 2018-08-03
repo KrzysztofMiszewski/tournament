@@ -3,10 +3,13 @@ package tournament.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tournament.dto.ParticipantDto;
+import tournament.dto.UserDto;
 import tournament.model.User;
 import tournament.service.UserService;
 
 import java.util.Set;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/api/users")
@@ -19,8 +22,8 @@ public class UserController {
             this.userService = userService;
     }
         @GetMapping
-        public Set<User> findAll() {
-            return userService.findAll();
+        public Set<UserDto> findAll() {
+            return userService.findAll().stream().map(UserDto::new).collect(Collectors.toSet());
         }
         @GetMapping("/2")
         public Set<User> findByLogin(@PathVariable String login){
