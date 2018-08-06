@@ -1,7 +1,9 @@
 package tournament.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tournament.aaa.TreeStructure;
 import tournament.dto.TournamentDto;
 import tournament.model.Tournament;
 import tournament.service.TournamentService;
@@ -33,5 +35,16 @@ public class TournamentController {
     @GetMapping("/get/{tournamentId}")
     public TournamentDto getTournament(@PathVariable Long tournamentId) {
         return new TournamentDto(tournamentService.findOneById(tournamentId));
+    }
+
+    @GetMapping("/get")
+    public TournamentDto getT() {
+        return new TournamentDto(tournamentService.findOneById(10L));
+    }
+
+    @GetMapping("/getTest/{id}")
+    public TreeStructure getTest(@PathVariable Long id) {
+        Tournament tournament = tournamentService.findOneById(id);
+        return new TreeStructure(tournament);
     }
 }
