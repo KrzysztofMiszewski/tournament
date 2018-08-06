@@ -10,4 +10,4 @@ public interface GameRepository extends CrudRepository <Game, Long> {
       Game findOneByRoundAndGameNumberAndTournament_Id(int round, int gameNumber, long tournament_id);
       Set<Game> findOneByRoundAndTournament_IdAndBlackIsNull(int round, long tournament_id);
       Game findAllBy ();
-    }
+      }

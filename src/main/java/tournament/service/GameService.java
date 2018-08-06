@@ -11,6 +11,9 @@ import java.util.Set;
 public interface GameService {
 
     Game showCurrentGame(int round, int gameNumber, long tournament_id);
+
+    void selectWinner(Long gameId, Long winnerId);
+
     void selectWinner(Game game, Participant winner);
     void create (Long tournamentId, int round, int gameNumber);
     Set<Game> findOneByRoundAndTournament_IdAndBlackIsNull(int round, long tournament_id);
