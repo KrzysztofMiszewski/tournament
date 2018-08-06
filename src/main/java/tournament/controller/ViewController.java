@@ -11,4 +11,8 @@ public class ViewController {
         return "index";
     }
 
+    @GetMapping("logging_success_page")
+    public String loggingSuccess() {
+        return "logging_success_page";
+    }
 }
