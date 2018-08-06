@@ -17,13 +17,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.csrf().disable();
         http.authorizeRequests()
-                .antMatchers("/api/users", "/login.html").permitAll()
+                .antMatchers("/login.html").permitAll()
                 .anyRequest().authenticated();
-
-        //  http.httpBasic();
         http.formLogin()
                 .loginPage("/login")
-                .defaultSuccessUrl("/view/logging_success_page")
+                .defaultSuccessUrl("logging_success_page")
                 .permitAll();
         http.logout()
                 .logoutUrl("/logout")
