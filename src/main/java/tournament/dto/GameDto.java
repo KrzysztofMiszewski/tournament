@@ -5,27 +5,27 @@ import tournament.model.Participant;
 
 public class GameDto {
 
-    private Participant white;
-    private Participant black;
+    private ParticipantDto white;
+    private ParticipantDto black;
     private String winner;
     private int round;
     private int gameNumber;
     private String tournamentName;
 
     public GameDto(Game game) {
-        this.white = game.getWhite();
-        this.black = game.getBlack();
+        if (game.getWhite() != null) this.white = new ParticipantDto(game.getWhite());
+        if (game.getBlack() != null)this.black = new ParticipantDto(game.getBlack());
         this.gameNumber = game.getGameNumber();
         this.round = game.getRound();
         this.winner = game.getWinner();
         tournamentName = game.getTournament().getName();
     }
 
-    public Participant getWhite() {
+    public ParticipantDto getWhite() {
         return white;
     }
 
-    public Participant getBlack() {
+    public ParticipantDto getBlack() {
         return black;
     }
 

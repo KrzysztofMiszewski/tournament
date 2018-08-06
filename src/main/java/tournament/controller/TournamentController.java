@@ -1,10 +1,9 @@
 package tournament.controller;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import tournament.aaa.TreeStructure;
 import tournament.dto.TournamentDto;
 import tournament.model.Tournament;
 import tournament.service.TournamentService;
@@ -26,5 +25,26 @@ public class TournamentController {
     @PostMapping("/new/{userId}/{maxPop}/{name}")
     public TournamentDto newTournament(@PathVariable Long userId, @PathVariable int maxPop, @PathVariable String name) {
         return new TournamentDto(tournamentService.create(userId, maxPop, name));
+    }
+
+    @PostMapping("/start/{tournamentId}")
+    public void startTournament(@PathVariable Long tournamentId) {
+        tournamentService.start(tournamentId);
+    }
+
+    @GetMapping("/get/{tournamentId}")
+    public TournamentDto getTournament(@PathVariable Long tournamentId) {
+        return new TournamentDto(tournamentService.findOneById(tournamentId));
+    }
+
+    @GetMapping("/get")
+    public TournamentDto getT() {
+        return new TournamentDto(tournamentService.findOneById(10L));
+    }
+
+    @GetMapping("/getTest/{id}")
+    public TreeStructure getTest(@PathVariable Long id) {
+        Tournament tournament = tournamentService.findOneById(id);
+        return new TreeStructure(tournament);
     }
 }

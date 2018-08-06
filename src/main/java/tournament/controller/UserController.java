@@ -25,13 +25,13 @@ public class UserController {
         public Set<UserDto> findAll() {
             return userService.findAll().stream().map(UserDto::new).collect(Collectors.toSet());
         }
-        @GetMapping("/2")
-        public Set<User> findByLogin(@PathVariable String login){
-                return userService.findByLogin(login);
+        @GetMapping("/findlogin{login}")
+        public Set<UserDto> findByLogin(@PathVariable String login){
+                return userService.findByLogin(login).stream().map(UserDto::new).collect(Collectors.toSet());
         }
-        @GetMapping("/3")
-        public User findOneById(@PathVariable Long id){
-            return userService.findOneById(id);
+        @GetMapping("/findid{id}")
+        public UserDto findOneById(@PathVariable Long id){
+            return new UserDto(userService.findOneById(id));
         }
         @PostMapping("/new/{login}/{password}")
         public void createNewUser(@PathVariable String login,

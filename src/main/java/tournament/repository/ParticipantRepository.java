@@ -8,9 +8,8 @@ import java.util.Set;
 
 @Repository
 public interface  ParticipantRepository extends CrudRepository<Participant,Long> {
-Set<Participant> findAllByMail(String mail);
-Set<Participant> findAllBy();
-Set<Participant> findAllByNick(String nick);
+    Set<Participant> findAllByMail(String mail);
+    Set<Participant> findAllByNick(String nick);
 
 
 }
