@@ -7,6 +7,7 @@ import tournament.model.Game;
 import tournament.model.Participant;
 import tournament.model.Tournament;
 import tournament.repository.GameRepository;
+import tournament.repository.ParticipantRepository;
 import tournament.repository.TournamentRepository;
 import tournament.service.GameService;
 
@@ -17,11 +18,13 @@ public class GameServiceImpl implements GameService {
 
     private GameRepository gameRepository;
     private TournamentRepository tournamentRepository;
+    private ParticipantRepository participantRepository;
 
     @Autowired
-    public GameServiceImpl(GameRepository gameRepository, TournamentRepository tournamentRepository) {
+    public GameServiceImpl(GameRepository gameRepository, TournamentRepository tournamentRepository, ParticipantRepository participantRepository) {
         this.gameRepository = gameRepository;
         this.tournamentRepository = tournamentRepository;
+        this.participantRepository = participantRepository;
     }
 
     @Override
@@ -30,14 +33,23 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
+    public void selectWinner(Long gameId, Long winnerId) {
+        if(winnerId == null || gameId == null){
+            System.out.println("Id is null");
+        }else {
+          selectWinner(gameRepository.findOne(gameId),participantRepository.findOne(winnerId));}
+    }
+
+    @Override
     @Transactional
     public void selectWinner(Game game, Participant winner) {
-
         Tournament tournament = game.getTournament();
         if (isFinal(game)) {
             tournament = game.getTournament();
             tournament.setWinner(winner.getNick());
             tournamentRepository.save(tournament);
+            game.setWinner(winner.getNick());
+            gameRepository.save(game);
         } else {
             game.setWinner(winner.getNick());
             gameRepository.save(game);
