@@ -32,9 +32,7 @@ public class GameServiceImpl implements GameService {
     @Override
     @Transactional
     public void selectWinner(Game game, Participant winner) {
-        if (winner == null) System.out.println("WinnerNull");
-        if (winner.getNick() == null) System.out.println("NickNull");
-        if (game == null) System.out.println("GameNull");
+
         Tournament tournament = game.getTournament();
         if (isFinal(game)) {
             tournament = game.getTournament();
