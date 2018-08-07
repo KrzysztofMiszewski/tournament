@@ -1,25 +1,21 @@
 package tournament.controller;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tournament.aaa.TreeStructure;
 import tournament.dto.TournamentDto;
 import tournament.model.Tournament;
 import tournament.service.TournamentService;
-import tournament.service.UserService;
 
 @RestController
 @RequestMapping("/api/tournaments")
 public class TournamentController {
 
     private TournamentService tournamentService;
-    private UserService userService;
 
     @Autowired
-    public TournamentController(TournamentService tournamentService, UserService userService) {
+    public TournamentController(TournamentService tournamentService) {
         this.tournamentService = tournamentService;
-        this.userService = userService;
     }
 
     @PostMapping("/new/{userId}/{maxPop}/{name}")
@@ -38,8 +34,8 @@ public class TournamentController {
     }
 
     @GetMapping("/getTest")
-    public TreeStructure getTest() {
-        Tournament tournament = tournamentService.findOneById(10L);
+    public TreeStructure getTest(@RequestParam Long id) {
+        Tournament tournament = tournamentService.findOneById(id);
         return new TreeStructure(tournament);
     }
 }
