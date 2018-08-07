@@ -1,6 +1,7 @@
 package tournament.aaa;
 
 import tournament.aaa.chart.Chart;
+import tournament.aaa.nodeStructure.LastNode;
 import tournament.aaa.nodeStructure.NodeStructure;
 import tournament.model.Game;
 import tournament.model.Tournament;
@@ -32,10 +33,10 @@ public class TreeStructure {
             nodeStructures.get(i).setName(sortedGames.get(i).getWinner());
         }
         for (int i = (nodeStructures.size() / 2); i < nodeStructures.size(); i++) {
-            nodeStructures.get(i).getChildren()[0] = new NodeStructure(sortedGames.get(i).getWhite().getNick());
+            nodeStructures.get(i).getChildren()[0] = new LastNode(sortedGames.get(i).getWhite().getNick());
             if (sortedGames.get(i).getBlack() != null)
-                nodeStructures.get(i).getChildren()[1] = new NodeStructure(sortedGames.get(i).getBlack().getNick());
-            else nodeStructures.get(i).getChildren()[1] = new NodeStructure("bye");
+                nodeStructures.get(i).getChildren()[1] = new LastNode(sortedGames.get(i).getBlack().getNick());
+            else nodeStructures.get(i).getChildren()[1] = new LastNode("bye");
         }
         this.nodeStructure = nodeStructures.get(0);
     }

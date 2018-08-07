@@ -1,10 +1,13 @@
 package tournament.aaa.nodeStructure;
 
+import com.fasterxml.jackson.annotation.JsonInclude;
+
+@JsonInclude(JsonInclude.Include.NON_NULL)
 public class NodeStructure {
 
     private Text text;
-    private String HTMLclass = "";
-    private NodeStructure[] children = new NodeStructure[2];
+    private String HTMLclass;
+    private Object[] children = new Object[2];
 
     public NodeStructure() {
     }
@@ -26,20 +29,18 @@ public class NodeStructure {
     public void setText(Text text) {
         this.text = text;
     }
-
     public String getHTMLclass() {
         return HTMLclass;
     }
-
     public void setHTMLclass(String HTMLclass) {
         this.HTMLclass = HTMLclass;
     }
 
-    public NodeStructure[] getChildren() {
+    public Object[] getChildren() {
         return children;
     }
 
-    public void setChildren(NodeStructure[] children) {
+    public void setChildren(Object[] children) {
         this.children = children;
     }
 }
