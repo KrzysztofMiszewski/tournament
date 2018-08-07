@@ -12,6 +12,7 @@ public class ViewController {
     public String home() {
         return "index";
     }
+ 
 
     @GetMapping("logging_success_page")
     public String loggingSuccess(Model model) {
