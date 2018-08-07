@@ -1,12 +1,16 @@
 package tournament.aaa.chart;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Node {
 
-    private String HTMLclass = "tennis-draw";
+    @JsonProperty("HTMLclass")
+    private String htmlclass = "tennis-draw";
+
     private boolean drawLineThrough = true;
 
-    public String getHTMLclass() {
-        return HTMLclass;
+    public String getHtmlclass() {
+        return htmlclass;
     }
 
     public boolean isDrawLineThrough() {
