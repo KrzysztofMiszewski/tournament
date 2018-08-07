@@ -9,7 +9,8 @@ import java.util.Set;
 public interface UserService {
 
     Set<User> findAll();
-    Set<User> findByLogin(String Login);
+    Set<User> findByLogin(String login);
+    User findOneByLogin(String login);
     User findOneById(Long id);
     void create(String login, String password);
     User logIn(User user);
