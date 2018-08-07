@@ -16,7 +16,7 @@ public class ViewController {
 
     @GetMapping("logging_success_page")
     public String loggingSuccess(Model model) {
-        model.addAttribute("login", "todo");
+        model.addAttribute("login", SecurityContextHolder.getContext().getAuthentication().getName());
         return "logging_success_page";
     }
 
