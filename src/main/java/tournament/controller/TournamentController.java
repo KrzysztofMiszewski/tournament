@@ -37,14 +37,9 @@ public class TournamentController {
         return new TournamentDto(tournamentService.findOneById(tournamentId));
     }
 
-    @GetMapping("/get")
-    public TournamentDto getT() {
-        return new TournamentDto(tournamentService.findOneById(10L));
-    }
-
-    @GetMapping("/getTest/{id}")
-    public TreeStructure getTest(@PathVariable Long id) {
-        Tournament tournament = tournamentService.findOneById(id);
+    @GetMapping("/getTest")
+    public TreeStructure getTest() {
+        Tournament tournament = tournamentService.findOneById(10L);
         return new TreeStructure(tournament);
     }
 }
