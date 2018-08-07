@@ -12,6 +12,4 @@ public interface UserRepository extends CrudRepository<User, Long> {
     Set<User> findAll();
     Set<User> findByLogin(String Login);
     Set<User> findOneById(Long id);
-
-
 }
