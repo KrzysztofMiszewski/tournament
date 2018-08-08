@@ -19,7 +19,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.authorizeRequests()
                 .antMatchers("/api/users", "/index.html", "/", "/login.html").permitAll()
-                .antMatchers("/img/**").permitAll()
+                .antMatchers("/img/**", "/css/**").permitAll()
                 .anyRequest().authenticated();
         //  http.httpBasic();
         http.formLogin()
