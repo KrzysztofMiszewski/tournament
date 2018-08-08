@@ -13,5 +13,6 @@ public interface TournamentRepository extends CrudRepository<Tournament, Long> {
     Set<Tournament> findAllBy();
     Set<Tournament> findAllByIsStartedIsFalse();
     Tournament findOneById(Long id);
+    Set<Tournament> findAllByOwnerId(Long id);
 
 }

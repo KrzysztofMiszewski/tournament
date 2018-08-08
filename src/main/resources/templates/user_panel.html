@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tournament - user panel</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+</head>
+<body style="background-image: url('img/chess.jpeg')">
+<div align="center">
+    <h1>Welcome on the tournament user panel</h1>
+    <h2>Start tournament</h2>
+    <h2>My tournaments:</h2>
+    <tr th:each="tournament: ${tournaments}">
+        Name: <td th:text="${tournament.name}" /> <br/>
+        Max Player: <td th:text="${tournament.MaxPop}" /><br/>
+        Winner: <td th:text="${tournament.winner}" /><br/>
+    </tr>
+    <br/>
+</div>
+</body>
+</html>

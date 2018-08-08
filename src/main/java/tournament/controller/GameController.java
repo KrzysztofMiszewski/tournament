@@ -12,7 +12,6 @@ import tournament.service.GameService;
 public class GameController {
 
    private GameService gameService;
-   private GameRepository gameRepository;
 
    @Autowired
    public GameController (GameService gameService) {
