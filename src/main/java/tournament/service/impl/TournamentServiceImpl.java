@@ -93,9 +93,12 @@ public class TournamentServiceImpl implements TournamentService {
             game.setWhite(participants.remove(index));
             gameRepository.save(game);
         }
+        int j = games / 2;
         for (int i = 0; i < games && !participants.isEmpty(); i++) {
             int index = (int) (Math.random() * participants.size());
-            game = gameRepository.findOneByRoundAndGameNumberAndTournament_Id(rounds, i, tournament.getId());
+            if (i % 2 == 0)
+                game = gameRepository.findOneByRoundAndGameNumberAndTournament_Id(rounds, (j + i), tournament.getId());
+            else game = gameRepository.findOneByRoundAndGameNumberAndTournament_Id(rounds, (j - i), tournament.getId());
             game.setBlack(participants.remove(index));
             gameRepository.save(game);
         }

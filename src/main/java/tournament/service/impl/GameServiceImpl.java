@@ -14,6 +14,7 @@ import tournament.service.GameService;
 import java.util.Set;
 
 @Service
+@Transactional
 public class GameServiceImpl implements GameService {
 
     private GameRepository gameRepository;
@@ -41,7 +42,6 @@ public class GameServiceImpl implements GameService {
     }
 
     @Override
-    @Transactional
     public void selectWinner(Game game, Participant winner) {
         Tournament tournament = game.getTournament();
         if (isFinal(game)) {

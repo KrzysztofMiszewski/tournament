@@ -5,7 +5,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 public class Node {
 
     @JsonProperty("HTMLclass")
-    private String htmlclass = "tennis-draw";
+    private String htmlclass = "game";
 
     private boolean drawLineThrough = true;
 
