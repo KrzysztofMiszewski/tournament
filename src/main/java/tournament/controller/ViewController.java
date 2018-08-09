@@ -52,6 +52,11 @@ public class ViewController {
         return new RedirectView("/user_panel");
     }
 
+    @GetMapping("/user_panel/show")
+    public RedirectView show (){
+        return new RedirectView("/tournamentChart/tournamentChart.html");
+    }
+
     @GetMapping("join")
     public String join () {
         return "join";
