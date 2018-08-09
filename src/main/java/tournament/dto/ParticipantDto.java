@@ -1,16 +1,15 @@
 package tournament.dto;
 
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import tournament.model.Participant;
 
-
 public class ParticipantDto {
-
-    private String mail;
-    private String nick;
+private String mail;
+private String nick;
 
     public ParticipantDto(Participant participant) {
-        this.mail = participant.getMail();
-        this.nick = participant.getNick();
+        this.mail = getMail();
+        this.nick = getNick();
     }
 
     public String getMail() {
@@ -20,6 +19,4 @@ public class ParticipantDto {
     public String getNick() {
         return nick;
     }
-
-
 }

@@ -25,7 +25,7 @@ public class TournamentDto {
         if (tournament.getParticipants() != null) {
             this.participants = tournament.getParticipants().stream().map(ParticipantDto::new).collect(Collectors.toSet());
         }
-        this.isStarted = tournament.getStarted();
+        this.isStarted = tournament.isStarted();
         if (tournament.getGames() != null) {
             int rounds = 0;
             for (Game game : tournament.getGames()) {

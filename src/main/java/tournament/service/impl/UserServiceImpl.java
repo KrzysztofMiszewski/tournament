@@ -27,14 +27,18 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Set<User> findByLogin(String Login) {
-        return userRepository.findByLogin(Login);
+    public Set<User> findByLogin(String login) {
+        return userRepository.findByLogin(login);
+    }
+
+    @Override
+    public User findOneByLogin(String login) {
+        return userRepository.findOneByLogin(login);
     }
 
     @Override
     public User findOneById(Long id) {
-        List<User> userz = new ArrayList<>(userRepository.findOneById(id));
-        return userz.get(0);
+        return userRepository.findOneById(id);
     }
     @Override
     public void create(String login, String password) {

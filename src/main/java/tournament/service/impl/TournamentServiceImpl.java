@@ -43,7 +43,7 @@ public class TournamentServiceImpl implements TournamentService {
 
     @Override
     public Set<Tournament> findAllByIsStartedIsFalse() {
-        return tournamentRepository.findAllByIsStartedIsFalse();
+        return tournamentRepository.findAllByStartedIsFalse();
     }
 
     @Override
@@ -53,7 +53,7 @@ public class TournamentServiceImpl implements TournamentService {
 
     @Override
     public Boolean isStarted(Tournament tournament) {
-        return tournament.getStarted();
+        return tournament.isStarted();
     }
 
     @Override
@@ -73,6 +73,7 @@ public class TournamentServiceImpl implements TournamentService {
         int rounds = createGames(tournament);
         randomiseParticipants(tournament, rounds);
         autoResolveWildcards(tournament, rounds);
+        tournament.setStarted(true);
     }
 
     private void autoResolveWildcards(Tournament tournament, int rounds) {
