@@ -4,7 +4,10 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+import org.springframework.web.servlet.view.RedirectView;
 import tournament.model.Tournament;
 import tournament.repository.TournamentRepository;
 import tournament.repository.UserRepository;
@@ -43,11 +46,14 @@ public class ViewController {
         return "user_panel";
     }
 
-    @PostMapping("/user_panel")
-    public String tournamentStart (Model model){
-        Tournament oneByOwnerId = tournamentRepository.findOneById(userRepository.findOneByLogin(SecurityContextHolder.getContext().getAuthentication().getName()).getId());
-        model.addAttribute("start", oneByOwnerId.getStarted());
-        return "user_panel";
+    @PostMapping("/user_panel/start/{tournamentId}")
+    public RedirectView tournamentStart (@PathVariable Long tournamentId, RedirectAttributes attributes){
+        tournamentService.start(tournamentId);
+        return new RedirectView("/user_panel");
     }
 
+    @GetMapping("sign_up")
+    public String signUp () {
+        return "sign_up";
+    }
 }
