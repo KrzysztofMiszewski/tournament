@@ -8,12 +8,13 @@
 <body style="background-image: url('img/chess.jpeg')">
 <div id="mayorHead" align="center" style="background: white">
     <h1>Welcome on the tournament user panel</h1>
-    <h2>Start tournament</h2>
+    <h2 th:action="start" accesskey="start" href="start">Start tournament</h2>
     <h2>My tournaments:</h2>
     <tr th:each="tournament: ${tournaments}">
         Name: <td th:text="${tournament.name}" /> <br/>
         Max Player: <td th:text="${tournament.MaxPop}" /><br/>
         Winner: <td th:text="${tournament.winner}" /><br/>
+        <br/>
     </tr>
     <br/>
 </div>
