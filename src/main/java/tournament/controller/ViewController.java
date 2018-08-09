@@ -52,8 +52,8 @@ public class ViewController {
         return new RedirectView("/user_panel");
     }
 
-    @GetMapping("sign_up")
-    public String signUp () {
-        return "sign_up";
+    @GetMapping("join")
+    public String join () {
+        return "join";
     }
 }
