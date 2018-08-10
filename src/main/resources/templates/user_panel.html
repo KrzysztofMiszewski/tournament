@@ -12,9 +12,9 @@
     <table>
         <tr>
             <td>Name</td>
-            <td>Max Players</td>
+            <td>Max players</td>
+            <td>Current number of players</td>
             <td>Winner</td>
-            <td></td>
             <td></td>
         </tr>
         <tr th:each="tournament: ${tournaments}">
@@ -22,7 +22,8 @@
             <td th:text="${tournament.maxPop}"/>
             <td th:text="${tournament.winner}"/>
             <td>
-                <form th:if="not ${tournament.started}" th:action="@{/user_panel/start/{tournamentId}(tournamentId=${tournament.id})}" method="post">
+                <form th:if="not ${tournament.started}"
+                      th:action="@{/user_panel/start/{tournamentId}(tournamentId=${tournament.id})}" method="post">
                     <button type="submit" name="your_name" value="your_value" class="btn-link">Start</button>
                 </form>
 
@@ -30,6 +31,11 @@
             <td>
                 <form th:action="@{/view/show-tournament/{tournamentId}(tournamentId=${tournament.id})}" method="get">
                     <button type="submit">Show tournament</button>
+                </form>
+            </td>
+            <td>
+                <form th:action="@{/view/create-tournament/{tournamentId}(tournamentId=${tournament.id})}" method="get">
+                    <button type="submit">Create tournament</button>
                 </form>
             </td>
         </tr>
