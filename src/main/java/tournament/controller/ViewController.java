@@ -4,6 +4,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
@@ -47,18 +48,25 @@ public class ViewController {
     }
 
     @PostMapping("/user_panel/start/{tournamentId}")
-    public RedirectView tournamentStart (@PathVariable Long tournamentId, RedirectAttributes attributes){
+    public RedirectView tournamentStart(@PathVariable Long tournamentId, RedirectAttributes attributes) {
         tournamentService.start(tournamentId);
         return new RedirectView("/user_panel");
     }
 
-    @GetMapping("/user_panel/show")
-    public RedirectView show (){
-        return new RedirectView("/tournamentChart/tournamentChart.html");
+    @GetMapping("/view/show-tournament/{tournamentId}")
+    public RedirectView tournamentShow(@PathVariable("tournamentId") String tournamentId, RedirectAttributes attributes) {
+        attributes.addAttribute("tournamentId", tournamentId);
+        return new RedirectView("/show-tournament");
+    }
+
+    @GetMapping("show-tournament")
+    public String showTournament(Model model, @ModelAttribute("tournamentId") Long tournamentId) {
+        model.addAttribute("tournamentId", tournamentId);
+        return "tournamentChart";
     }
 
     @GetMapping("join")
-    public String join () {
+    public String join() {
         return "join";
     }
 }
