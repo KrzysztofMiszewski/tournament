@@ -20,11 +20,12 @@
         <tr th:each="tournament: ${tournaments}">
             <td th:text="${tournament.name}"/>
             <td th:text="${tournament.maxPop}"/>
+
             <td th:text="${tournament.winner}"/>
             <td>
                 <form th:if="not ${tournament.started}"
                       th:action="@{/user_panel/start/{tournamentId}(tournamentId=${tournament.id})}" method="post">
-                    <button type="submit" name="your_name" value="your_value" class="btn-link">Start</button>
+                    <button type="submit" name="your_name" value="your_value" class="btn-link">Start tournament</button>
                 </form>
 
             </td>

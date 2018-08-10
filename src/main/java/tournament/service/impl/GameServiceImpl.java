@@ -84,6 +84,13 @@ public class GameServiceImpl implements GameService {
         return gameRepository.findOneByRoundAndGameNumberAndTournament_Id(round,gameNumber,tournament_id);
     }
 
+    @Override
+    public void setWinner(String name, int gameNumber, int round, long tournamentId) {
+        Participant participant = participantRepository.findOneByNick(name);
+        Game game = gameRepository.findOneByRoundAndGameNumberAndTournament_Id(round, gameNumber, tournamentId);
+        selectWinner(game, participant);
+    }
+
     private boolean isFinal(Game game) {
         return (game.getRound() == 0);
     }
