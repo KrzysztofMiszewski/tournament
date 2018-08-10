@@ -65,7 +65,7 @@ public class ViewController {
         return "tournamentChart";
     }
 
-    @GetMapping("create-tournament")
+    @GetMapping("create_tournament")
     public String createTournament() {
         return "create_tournament";
     }
