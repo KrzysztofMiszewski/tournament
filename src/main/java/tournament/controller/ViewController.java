@@ -66,9 +66,8 @@ public class ViewController {
     }
 
     @GetMapping("create-tournament")
-    public String createTournament(Model model, @ModelAttribute("tournamentId") Long tournamentId) {
-        model.addAttribute("tournamentId", tournamentId);
-        return "tournamentChart";
+    public String createTournament() {
+        return "create_tournament";
     }
 
     @GetMapping("join")
