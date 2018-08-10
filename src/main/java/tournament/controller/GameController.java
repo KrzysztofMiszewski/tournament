@@ -2,6 +2,7 @@ package tournament.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tournament.dto.WinnerParams;
 import tournament.model.Game;
 import tournament.model.Participant;
 import tournament.repository.GameRepository;
@@ -23,14 +24,15 @@ public class GameController {
         return gameService.findOneByRoundAndGameNumberAndTournament_Id(round, gameNumber, tournament_id);
    }
 
-   @GetMapping
-   public void create (@RequestParam Long tournamentId, @RequestParam int round, @RequestParam int gameNumber){
-        gameService.create(tournamentId, round, gameNumber);
-   }
-
    @GetMapping("/find")
    public Game findOneByRoundAndGameNumberAndTournament_Id(int round, int gameNumber, long tournament_id){
         return gameService.findOneByRoundAndGameNumberAndTournament_Id(round, gameNumber, tournament_id);
+   }
+
+   @PutMapping("/setWinner")
+   public void setWinner(@RequestBody WinnerParams winner) {
+       System.out.println(winner.getName() + " " + winner.getGame() + " " + winner.getRound() + " " + winner.getTournamentId());
+
    }
 
    @PutMapping("/winner")
