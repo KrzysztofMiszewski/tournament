@@ -38,8 +38,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User findOneById(Long id) {
-        List<User> userz = new ArrayList<>(userRepository.findOneById(id));
-        return userz.get(0);
+        return userRepository.findOneById(id);
     }
     @Override
     public void create(String login, String password) {

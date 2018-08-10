@@ -1,15 +1,36 @@
 <!DOCTYPE html>
-<html lang="en">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <meta charset="UTF-8">
     <title>Tournament - user panel</title>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="css/style.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-<div align="center">
+<div id="mayorHead">
     <h1>Welcome on the tournament user panel</h1>
-    <h3>Start tournament</h3>
-    <h3>My tournaments:</h3>
-    <br/>
+    <h2>My tournaments:</h2>
+    <table>
+        <tr>
+            <td>Name</td>
+            <td>Max Players</td>
+            <td>Winner</td>
+            <td></td>
+        </tr>
+        <tr th:each="tournament: ${tournaments}">
+            <td th:text="${tournament.name}"/>
+            <td th:text="${tournament.maxPop}"/>
+            <td th:text="${tournament.winner}"/>
+            <td>
+                <form th:if="not ${tournament.started}" th:action="@{/user_panel/start/{tournamentId}(tournamentId=${tournament.id})}" method="post">
+                    <button type="submit" name="your_name" value="your_value" class="btn-link">Start</button>
+                </form>
+                <form th:action="@{/tournamentChart/tournamentChart.html}" method="get">
+                    <button type="submit">Show tournament</button>
+                </form>
+                <br/>
+            </td>
+        </tr>
+    </table>
 </div>
 </body>
 </html>

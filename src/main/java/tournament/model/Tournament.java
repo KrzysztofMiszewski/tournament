@@ -17,7 +17,7 @@ public class Tournament {
     @ManyToOne
     private User owner;
     private String winner;
-    private Integer MaxPop;
+    private Integer maxPop;
     private String name;
 
     @ManyToMany(cascade = {CascadeType.ALL})
@@ -26,14 +26,14 @@ public class Tournament {
             joinColumns = {@JoinColumn(name = "tournament_id")},
             inverseJoinColumns = {@JoinColumn(name = "participant_id")})
     private Set<Participant> participants = new HashSet<>();
-    private Boolean isStarted = false;
+    private Boolean started = false;
 
-    public Boolean getStarted() {
-        return isStarted;
+    public Boolean isStarted() {
+        return started;
     }
 
     public void setStarted(Boolean started) {
-        isStarted = started;
+        this.started = started;
     }
 
     public Long getId() {
@@ -65,11 +65,11 @@ public class Tournament {
     }
 
     public Integer getMaxPop() {
-        return MaxPop;
+        return maxPop;
     }
 
     public void setMaxPop(Integer maxPop) {
-        MaxPop = maxPop;
+        this.maxPop = maxPop;
     }
 
     public String getName() {

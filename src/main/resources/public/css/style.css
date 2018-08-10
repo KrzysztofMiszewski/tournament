@@ -1,0 +1,10 @@
+body{
+    color: darkblue;
+    background-image: url("/img/chess.jpeg");
+}
+#mayorHead
+{margin-left: 400px;
+margin-right: 400px;
+    text-align: center;
+    border: 3px solid black;
+}

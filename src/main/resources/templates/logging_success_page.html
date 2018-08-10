@@ -3,12 +3,12 @@
 <head>
     <title>Tournament</title>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <link href="css/style.css" type="text/css" rel="stylesheet"/>
 </head>
 <body>
-<div align="center">
-    <p th:text="'Hello, ' + ${login} + '!'"></p>
-<h3><a href="/sign_up.">Choose one of the non-started tournament and sign up on it!</a></h3>
-<h3><a href="/user_panel.">My tournaments</a></h3>
+<div id="mayorHead">
+    <h1 th:text="'Hello, ' + ${login} + '!'"></h1>
+    <h2><a href="/user_panel">My tournaments</a></h2>
 </div>
 </body>
 </html>
