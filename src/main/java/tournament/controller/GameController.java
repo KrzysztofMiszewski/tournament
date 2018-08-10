@@ -2,6 +2,7 @@ package tournament.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import tournament.constants.Constants;
 import tournament.dto.WinnerParams;
 import tournament.model.Game;
 import tournament.model.Participant;
@@ -31,8 +32,8 @@ public class GameController {
 
    @PutMapping("/setWinner")
    public void setWinner(@RequestBody WinnerParams winner) {
-       System.out.println(winner.getName() + " " + winner.getGame() + " " + winner.getRound() + " " + winner.getTournamentId());
-
+       if (winner.getName() != Constants.WILDCARD)
+           gameService.setWinner(winner.getName(), winner.getGame(), winner.getRound(), winner.getTournamentId());
    }
 
    @PutMapping("/winner")
