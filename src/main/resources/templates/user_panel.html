@@ -5,8 +5,8 @@
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
     <link href="css/style.css" type="text/css" rel="stylesheet"/>
 </head>
-<body style="background-image: url('img/chess.jpeg')">
-<div id="mayorHead" align="center" style="background: white">
+<body>
+<div id="mayorHead">
     <h1>Welcome on the tournament user panel</h1>
     <h2>My tournaments:</h2>
     <table>
@@ -14,6 +14,7 @@
             <td>Name</td>
             <td>Max Players</td>
             <td>Winner</td>
+            <td></td>
             <td></td>
         </tr>
         <tr th:each="tournament: ${tournaments}">
@@ -23,6 +24,12 @@
             <td>
                 <form th:if="not ${tournament.started}" th:action="@{/user_panel/start/{tournamentId}(tournamentId=${tournament.id})}" method="post">
                     <button type="submit" name="your_name" value="your_value" class="btn-link">Start</button>
+                </form>
+
+            </td>
+            <td>
+                <form th:action="@{/view/show-tournament/{tournamentId}(tournamentId=${tournament.id})}" method="get">
+                    <button type="submit">Show tournament</button>
                 </form>
             </td>
         </tr>

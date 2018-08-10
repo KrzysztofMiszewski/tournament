@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1"/>
+    <meta name="viewport" content="width=device-width"/>
+    <title> Tournament Tree </title>
+    <link rel="stylesheet" href="tournamentChart/treant-js-master/Treant.css"/>
+    <link rel="stylesheet" href="tournamentChart/simple.css"/>
+</head>
+<body>
+    <div class="chart" id="OrganiseChart6"></div>
+<script src="tournamentChart/treant-js-master/vendor/raphael.js"/>
+<script src="tournamentChart/treant-js-master/Treant.js"/>
+<script src="tournamentChart/jquery-3.3.1.min.js"/>
+<script src="tournamentChart/simple.js"/>
+<script th:inline="javascript">
+    getWithAjax([[${tournamentId}]]);
+</script>
+</body>
+</html>
