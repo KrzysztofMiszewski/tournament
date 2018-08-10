@@ -10,6 +10,7 @@ import java.util.Set;
 public interface  ParticipantRepository extends CrudRepository<Participant,Long> {
     Set<Participant> findAllByMail(String mail);
     Set<Participant> findAllByNick(String nick);
+    Participant findOneByNick(String nick);
 
 
 }
