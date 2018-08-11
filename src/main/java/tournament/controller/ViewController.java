@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
+import tournament.dto.JoinTournamentDto;
 import tournament.model.Tournament;
 import tournament.repository.TournamentRepository;
 import tournament.repository.UserRepository;
@@ -71,7 +72,18 @@ public class ViewController {
     }
 
     @GetMapping("join")
-    public String join() {
+    public String tournamentsOpenList(Model model) {
+        Set<Tournament> allByOwnerId = tournamentRepository.findAllByStartedIsFalse();
+        model.addAttribute("tournaments", allByOwnerId);
         return "join";
+    }
+
+    @GetMapping("joinRegister/{tournamentId}")
+    public String joinRegister(@PathVariable Long tournamentId, Model model) {
+        model.addAttribute("tournamentId", tournamentId);
+        Tournament tournament = tournamentRepository.findOneById(tournamentId);
+        model.addAttribute("tournamentName", tournament.getName());
+        model.addAttribute("dto", new JoinTournamentDto());
+        return "joinRegister";
     }
 }

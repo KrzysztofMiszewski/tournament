@@ -21,7 +21,7 @@
         <tr th:each="tournament: ${tournaments}">
             <td th:text="${tournament.name}"/>
             <td th:text="${tournament.maxPop}"/>
-            <td></td>
+            <td th:text="${tournament.participants.size()}"/>
             <td th:text="${tournament.winner}"/>
             <td>
                 <form th:if="not ${tournament.started}"
