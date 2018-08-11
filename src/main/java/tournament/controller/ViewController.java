@@ -10,11 +10,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import org.springframework.web.servlet.view.RedirectView;
 import tournament.dto.JoinTournamentDto;
+import tournament.dto.CreateTournamentDto;
 import tournament.model.Tournament;
 import tournament.repository.TournamentRepository;
 import tournament.repository.UserRepository;
 import tournament.service.TournamentService;
-
 import java.util.Set;
 
 @Controller
@@ -67,7 +67,8 @@ public class ViewController {
     }
 
     @GetMapping("create_tournament")
-    public String createTournament() {
+    public String createTournament(Model model) {
+        model.addAttribute("dto", new CreateTournamentDto());
         return "/create_tournament";
     }
 
@@ -87,3 +88,4 @@ public class ViewController {
         return "joinRegister";
     }
 }
+
