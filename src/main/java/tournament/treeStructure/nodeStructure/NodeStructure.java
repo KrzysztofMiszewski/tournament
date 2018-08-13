@@ -1,27 +1,28 @@
-package tournament.aaa.nodeStructure;
+package tournament.treeStructure.nodeStructure;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
-public class LastNode {
+public class NodeStructure {
 
-    private Text text;
+    private Text text = new Text();
     @JsonProperty("HTMLclass")
     private String htmlClass;
+    private Object[] children = new Object[2];
 
-    public LastNode() {
+    public NodeStructure() {
     }
 
-    public LastNode(String name, String htmlClass) {
+    public NodeStructure(String name) {
         setName(name);
-        this.htmlClass = htmlClass;
     }
 
     public void setName(String name) {
-        this.text = new Text();
-        if (name != null) this.text.setName(name);
-        else this.text.setName("");
+//        this.text = new Text();
+//        if (name != null) this.text.setName(name);
+//        else this.text.setName("");
+        text.setName(name);
     }
 
     public Text getText() {
@@ -31,13 +32,18 @@ public class LastNode {
     public void setText(Text text) {
         this.text = text;
     }
-
     public String getHtmlClass() {
         return htmlClass;
     }
-
     public void setHtmlClass(String htmlClass) {
         this.htmlClass = htmlClass;
     }
 
+    public Object[] getChildren() {
+        return children;
+    }
+
+    public void setChildren(Object[] children) {
+        this.children = children;
+    }
 }

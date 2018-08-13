@@ -1,4 +1,4 @@
-package tournament.aaa.chart;
+package tournament.treeStructure.chart;
 
 public class Chart {
 

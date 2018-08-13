@@ -1,8 +1,8 @@
-package tournament.aaa;
+package tournament.treeStructure;
 
-import tournament.aaa.chart.Chart;
-import tournament.aaa.nodeStructure.LastNode;
-import tournament.aaa.nodeStructure.NodeStructure;
+import tournament.treeStructure.chart.Chart;
+import tournament.treeStructure.nodeStructure.LastNode;
+import tournament.treeStructure.nodeStructure.NodeStructure;
 import tournament.constants.Constants;
 import tournament.model.Game;
 import tournament.model.Tournament;
@@ -22,21 +22,13 @@ public class TreeStructure {
         List<Game> sortedGames = tournament.getGames().stream()
                 .sorted(comparingInt(Game::getRound).thenComparingInt(Game::getGameNumber))
                 .collect(toList());
-        List<NodeStructure> nodeStructures = new ArrayList<>();
-        for (int i = 0; i < sortedGames.size(); i++) {
-            nodeStructures.add(new NodeStructure());
-        }
-        for (int i = 0; i < nodeStructures.size()/2; i++) {
-            NodeStructure node = setGameNoAndRound(nodeStructures.get(2*i + 1), sortedGames.get(i));
-            nodeStructures.get(i).getChildren()[0] = node;
-            node = setGameNoAndRound(nodeStructures.get(2*i + 2), sortedGames.get(i));
-            nodeStructures.get(i).getChildren()[1] = node;
-//            nodeStructures.get(i).getChildren()[0] = nodeStructures.get(2*i + 1);
-//            nodeStructures.get(i).getChildren()[1] = nodeStructures.get(2*i + 2);
-        }
-        for (int i = 0; i < nodeStructures.size(); i++) {
-            nodeStructures.get(i).setName(sortedGames.get(i).getWinner());
-        }
+        List<NodeStructure> nodeStructures = createNodes(sortedGames);
+        buildTree(sortedGames, nodeStructures);
+        nodeStructures.get(0).setHtmlClass("winner");
+        this.nodeStructure = nodeStructures.get(0);
+    }
+
+    private void addLastNodes(List<Game> sortedGames, List<NodeStructure> nodeStructures) {
         for (int i = (nodeStructures.size() / 2); i < nodeStructures.size(); i++) {
             LastNode node = setGameNoAndRound(new LastNode(sortedGames.get(i).getWhite().getNick(),"first"),
                     sortedGames.get(i));
@@ -47,13 +39,32 @@ public class TreeStructure {
             else node = setGameNoAndRound(new LastNode(Constants.WILDCARD, "first bye"),
                     sortedGames.get(i));
             nodeStructures.get(i).getChildren()[1] = node;
-//            nodeStructures.get(i).getChildren()[0] = new LastNode(sortedGames.get(i).getWhite().getNick(), "first");
-//            if (sortedGames.get(i).getBlack() != null)
-//                nodeStructures.get(i).getChildren()[1] = new LastNode(sortedGames.get(i).getBlack().getNick(), "first");
-//            else nodeStructures.get(i).getChildren()[1] = new LastNode(Constants.WILDCARD, "first bye");
         }
-        nodeStructures.get(0).setHtmlClass("winner");
-        this.nodeStructure = nodeStructures.get(0);
+    }
+
+    private void setWinners(List<Game> sortedGames, List<NodeStructure> nodeStructures) {
+        for (int i = 0; i < nodeStructures.size(); i++) {
+            nodeStructures.get(i).setName(sortedGames.get(i).getWinner());
+        }
+    }
+
+    private void buildTree(List<Game> sortedGames, List<NodeStructure> nodeStructures) {
+        for (int i = 0; i < nodeStructures.size()/2; i++) {
+            NodeStructure node = setGameNoAndRound(nodeStructures.get(2*i + 1), sortedGames.get(i));
+            nodeStructures.get(i).getChildren()[0] = node;
+            node = setGameNoAndRound(nodeStructures.get(2*i + 2), sortedGames.get(i));
+            nodeStructures.get(i).getChildren()[1] = node;
+        }
+        setWinners(sortedGames, nodeStructures);
+        addLastNodes(sortedGames, nodeStructures);
+    }
+
+    private List<NodeStructure> createNodes(List<Game> sortedGames) {
+        List<NodeStructure> nodeStructures = new ArrayList<>();
+        for (int i = 0; i < sortedGames.size(); i++) {
+            nodeStructures.add(new NodeStructure());
+        }
+        return  nodeStructures;
     }
 
     private NodeStructure setGameNoAndRound(NodeStructure node, Game game) {
