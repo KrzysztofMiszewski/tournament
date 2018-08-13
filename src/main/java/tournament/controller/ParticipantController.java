@@ -3,6 +3,7 @@ package tournament.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.view.RedirectView;
 import tournament.dto.JoinTournamentDto;
 import tournament.service.ParticipantService;
 
@@ -24,8 +25,8 @@ public class ParticipantController {
     }
 
     @PostMapping("/join")
-    public String Join(@ModelAttribute JoinTournamentDto dto) {
+    public RedirectView Join(@ModelAttribute JoinTournamentDto dto) {
         participantService.Join(dto.getTournamentId(), dto.getNickname(), dto.getEmail());
-        return "join";
+        return new RedirectView("/join");
     }
 }
