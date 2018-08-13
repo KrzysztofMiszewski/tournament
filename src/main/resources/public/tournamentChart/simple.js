@@ -10,7 +10,6 @@ function getWithAjax(id) {
             console.log(json);
             new Treant(json);
             $(".game").on("click", function (e) {
-                //your code here..
                 var game = parseInt($(this)[0].attributes.getNamedItem("data-game").nodeValue);
                 var round = parseInt($(this)[0].attributes.getNamedItem("data-round").nodeValue);
                 var name = $(this)[0].children[0].innerText;
@@ -23,9 +22,7 @@ function getWithAjax(id) {
                     round: round,
                     tournamentId: id
                 }));
-                console.log();
-                alert("round: " + round + " game: " + game + "\nname: " + name);
-                e.preventDefault(); //to prevent any other unwanted behavior clicking the div might cause
+                e.preventDefault(); //to prevent any other unwanted behavior clicking might cause
             });
         }
     });

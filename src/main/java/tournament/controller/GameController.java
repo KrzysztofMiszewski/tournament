@@ -32,7 +32,7 @@ public class GameController {
 
    @PutMapping("/setWinner")
    public void setWinner(@RequestBody WinnerParams winner) {
-       if (winner.getName() != Constants.WILDCARD)
+       if (!winner.getName().equals(Constants.WILDCARD))
            gameService.setWinner(winner.getName(), winner.getGame(), winner.getRound(), winner.getTournamentId());
    }
 

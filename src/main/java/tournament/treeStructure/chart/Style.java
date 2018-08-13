@@ -1,4 +1,4 @@
-package tournament.aaa.chart;
+package tournament.treeStructure.chart;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 

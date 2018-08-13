@@ -1,8 +1,7 @@
-package tournament.aaa.nodeStructure;
+package tournament.treeStructure.nodeStructure;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
 import com.fasterxml.jackson.annotation.JsonProperty;
-import io.swagger.models.auth.In;
 
 @JsonInclude(JsonInclude.Include.NON_NULL)
 public class Text {
