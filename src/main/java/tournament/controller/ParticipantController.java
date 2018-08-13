@@ -3,14 +3,17 @@ package tournament.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import tournament.dto.CreateTournamentDto;
 import tournament.dto.JoinTournamentDto;
 import tournament.service.ParticipantService;
+import tournament.service.TournamentService;
 
 @Controller
 @RequestMapping("api/participants")
 public class ParticipantController {
 
     private ParticipantService participantService;
+    private TournamentService tournamentService;
 
     @Autowired
     public ParticipantController(ParticipantService participantService) {
@@ -28,4 +31,6 @@ public class ParticipantController {
         participantService.Join(dto.getTournamentId(), dto.getNickname(), dto.getEmail());
         return "join";
     }
+
+
 }

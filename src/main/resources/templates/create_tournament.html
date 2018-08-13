@@ -8,10 +8,11 @@
 <body>
 <div id="mayorHead">
     <h1>Welcome in create tournament page.</h1>
-    <form action="#" th:action="@{/api/tournaments}" th:object="${dto}" method="post">
+    <form action="#" th:action="@{/api/tournaments/create}" th:object="${dto}" method="post">
         <p>Name: <input type="text" th:field="*{name}" /></p>
         <p>Max Pop: <input type="text" th:field="*{size}" /></p>
-        <p><input type="submit" value="Submit" /> </p>
+        <input type="text" name="" th:hidden="true" />
+        <p><input type="submit" value="Submit" name="your_name" /> </p>
     </form>
 </div>
 </body>

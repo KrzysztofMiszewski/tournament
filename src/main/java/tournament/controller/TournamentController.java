@@ -1,7 +1,9 @@
 package tournament.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
+import tournament.service.UserService;
 import tournament.treeStructure.TreeStructure;
 import tournament.dto.CreateTournamentDto;
 import tournament.dto.TournamentDto;
@@ -13,10 +15,12 @@ import tournament.service.TournamentService;
 public class TournamentController {
 
     private TournamentService tournamentService;
+    private UserService userService;
 
     @Autowired
-    public TournamentController(TournamentService tournamentService) {
+    public TournamentController(TournamentService tournamentService, UserService userService) {
         this.tournamentService = tournamentService;
+        this.userService = userService;
     }
 
     @PostMapping("/new/{userId}/{maxPop}/{name}")
@@ -40,10 +44,10 @@ public class TournamentController {
         return new TreeStructure(tournament);
     }
 
-    @PostMapping()
-    public void createTournament(CreateTournamentDto dto) {
-        System.out.println(dto.getName() + " " + dto.getSize());
+    @PostMapping("/create")
+    public String Create(@ModelAttribute CreateTournamentDto dto) {
+        String name = SecurityContextHolder.getContext().getAuthentication().getName();
+        tournamentService.create(userService.findOneByLogin(name).getId(), dto.getSize(), dto.getName());
+        return "create_tournament";
     }
-
-
 }
