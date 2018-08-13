@@ -7,8 +7,9 @@
 </head>
 <body>
 <div id="mayorHead">
-    <form action="#" th:action="@{/joinRegister}" th:object="${dto}" method="post">
-        <p>Tournament Id: <input type="text" id="tournamentId" name="tournamentId" th:value="${tournamentId}" th:disabled="true"/></p>
+    <form action="#" th:action="@{/api/participants/join}" th:object="${dto}" method="post">
+        <input type="text" id="tournamentId" name="tournamentId" th:value="${tournamentId}" th:hidden="true"/>
+        <p th:text="'Tournament name: ' + ${tournamentName}" ></p>
         <p>Your nickname: <input type="text" th:field="*{nickname}"/></p>
         <p>Your email: <input type="email" th:field="*{email}"/></p>
         <p><input type="submit" value="Submit"/> <input type="reset" value="Reset"/></p>

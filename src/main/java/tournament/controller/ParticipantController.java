@@ -1,10 +1,12 @@
 package tournament.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
+import tournament.dto.JoinTournamentDto;
 import tournament.service.ParticipantService;
 
-@RestController
+@Controller
 @RequestMapping("api/participants")
 public class ParticipantController {
 
@@ -15,8 +17,15 @@ public class ParticipantController {
         this.participantService = participantService;
     }
 
+    @ResponseBody
     @PostMapping("/join/{tournamentId}/{nick}/{mail}")
     public void Join(@PathVariable Long tournamentId, @PathVariable String nick , @PathVariable String mail) {
         participantService.Join(tournamentId, nick, mail);
+    }
+
+    @PostMapping("/join")
+    public String Join(@ModelAttribute JoinTournamentDto dto) {
+        participantService.Join(dto.getTournamentId(), dto.getNickname(), dto.getEmail());
+        return "join";
     }
 }
