@@ -3,6 +3,7 @@ package tournament.controller;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 import tournament.treeStructure.TreeStructure;
+import tournament.dto.CreateTournamentDto;
 import tournament.dto.TournamentDto;
 import tournament.model.Tournament;
 import tournament.service.TournamentService;
@@ -38,4 +39,11 @@ public class TournamentController {
         Tournament tournament = tournamentService.findOneById(id);
         return new TreeStructure(tournament);
     }
+
+    @PostMapping()
+    public void createTournament(CreateTournamentDto dto) {
+        System.out.println(dto.getName() + " " + dto.getSize());
+    }
+
+
 }

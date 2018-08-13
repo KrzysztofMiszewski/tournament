@@ -8,17 +8,28 @@
 <body>
 <div id="mayorHead">
     <h1>Welcome on the tournament join page</h1>
-    <h2>Choose one of the non-started tournament and join it!</h2>
+    <h2>Choose one of the tournament and join it!</h2>
     <table>
         <tr>
             <td>Name</td>
             <td>Max players</td>
             <td>Current number of players</td>
-            <td>Winner</td>
+            <td></td>
+        </tr>
+        <tr th:each="tournament: ${tournaments}">
+            <td th:text="${tournament.name}"/>
+            <td th:text="${tournament.maxPop}"/>
+            <td th:text="${tournament.participants.size()}"/>
+            <td>
+                <form th:if="not ${tournament.started}"
+                      th:action="@{/joinRegister/{tournamentId}(tournamentId=${tournament.id})}">
+                <button type="submit">Join tournament</button>
+                </form>
+            </td>
         </tr>
     </table>
 
-    <h3>You will be informed when tournament will be started via mail.</h3>
+    <h4>You will be informed when tournament will be started via mail.</h4>
     <br/>
 </div>
 </body>

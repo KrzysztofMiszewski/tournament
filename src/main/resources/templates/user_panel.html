@@ -8,6 +8,7 @@
 <body>
 <div id="mayorHead">
     <h1>Welcome on the tournament user panel</h1>
+    <h2><a href="/create_tournament">Create new tournament!</a></h2>
     <h2>My tournaments:</h2>
     <table>
         <tr>
@@ -20,22 +21,18 @@
         <tr th:each="tournament: ${tournaments}">
             <td th:text="${tournament.name}"/>
             <td th:text="${tournament.maxPop}"/>
+            <td th:text="${tournament.participants.size()}"/>
             <td th:text="${tournament.winner}"/>
             <td>
                 <form th:if="not ${tournament.started}"
                       th:action="@{/user_panel/start/{tournamentId}(tournamentId=${tournament.id})}" method="post">
-                    <button type="submit" name="your_name" value="your_value" class="btn-link">Start</button>
+                    <button type="submit" name="your_name" value="your_value" class="btn-link">Start tournament</button>
                 </form>
 
             </td>
             <td>
                 <form th:action="@{/view/show-tournament/{tournamentId}(tournamentId=${tournament.id})}" method="get">
                     <button type="submit">Show tournament</button>
-                </form>
-            </td>
-            <td>
-                <form th:action="@{/view/create-tournament/{tournamentId}(tournamentId=${tournament.id})}" method="get">
-                    <button type="submit">Create tournament</button>
                 </form>
             </td>
         </tr>
